@@ -12,7 +12,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "start": "ts-node --esm src/index.ts --watch"
+    "start": "nodemon src/index.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

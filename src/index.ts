@@ -31,7 +31,7 @@ app.get("/", async (_, res: Response) => {
 
 app.post("/", async (req: Request<Contact>, res: Response) => {
   const newData = req.body;
-  const data: Contact[] = await storage.getItem("data");
+  const data: Contact[] = (await storage.getItem("data")) || [];
   const id = randomUUID();
   data.push({ ...newData, id });
   setStoreItem(data, res);
