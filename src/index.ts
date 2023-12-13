@@ -1,9 +1,7 @@
 import express, { Request, Response } from "express";
-import bodyParser from "body-parser";
 import { randomUUID } from "crypto";
 import storage from "node-persist";
 import cors from "cors";
-import { log } from "console";
 
 interface Contact {
   id: string;
@@ -28,13 +26,10 @@ const setStoreItem = (data: Contact[], res: Response) => {
 
 app.get("/", async (_, res: Response) => {
   const data = await storage.getItem("data");
-
-  console.log({ data });
-
   res.json(data);
 });
 
-app.post("/", jsonParser, async (req: Request<Contact>, res: Response) => {
+app.post("/", async (req: Request<Contact>, res: Response) => {
   const newData = req.body;
   const data: Contact[] = await storage.getItem("data");
   const id = randomUUID();
@@ -42,7 +37,7 @@ app.post("/", jsonParser, async (req: Request<Contact>, res: Response) => {
   setStoreItem(data, res);
 });
 
-app.put("/:id", jsonParser, async (req: Request<Contact>, res: Response) => {
+app.put("/:id", async (req: Request<Contact>, res: Response) => {
   const { id } = req.params;
   const updatedData: Contact = req.body;
   const data: Contact[] = await storage.getItem("data");
