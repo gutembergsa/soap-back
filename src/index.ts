@@ -20,8 +20,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const jsonParser = bodyParser.json();
-
 const setStoreItem = (data: Contact[], res: Response) => {
   storage.setItem("data", data).then(({ content: { value } }) => {
     res.json(value);
