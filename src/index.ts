@@ -25,7 +25,7 @@ const setStoreItem = (data: Contact[], res: Response) => {
 };
 
 app.get("/", async (_, res: Response) => {
-  const data = await storage.getItem("data");
+  const data = (await storage.getItem("data")) || [];
   res.json(data);
 });
 
